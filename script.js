@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const rostersContainer = document.getElementById('rosters-container');
     const resetButton = document.getElementById('reset-button');
     const scoreboard = document.getElementById('scoreboard');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const bodyEl = document.body;
 
     const NUM_PLAYERS = 9;
     const NUM_INNINGS = 9;
@@ -107,6 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         calculateAndDisplayTotals();
+
+        // Apply dark mode if saved
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyEl.classList.add('dark-mode');
+        }
     };
 
     // --- リセット機能 ---
@@ -147,6 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     resetButton.addEventListener('click', resetBoard);
+
+    darkModeToggle.addEventListener('click', () => {
+        bodyEl.classList.toggle('dark-mode');
+        // Save the user's preference
+        if (bodyEl.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
 
     // --- 初期読込 ---
     loadState();

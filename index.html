@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>野球スコアブック</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>野球スコアブック</h1>
-    <div id="game-info">
+    <div class="container">
+        <h1>野球スコアブック</h1>
+        <div id="game-info">
         <input type="text" id="visitor-team-name" placeholder="ビジターチーム">
         <span>VS</span>
         <input type="text" id="home-team-name" placeholder="ホームチーム">
@@ -16,6 +20,7 @@
 
     <div id="controls">
         <button id="reset-button">リセット</button>
+        <button id="dark-mode-toggle">ダークモード切替</button>
     </div>
 
     <table id="scoreboard">
@@ -76,5 +81,6 @@
     </div>
 
     <script src="script.js"></script>
+    </div>
 </body>
 </html>
