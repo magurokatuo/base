@@ -35,33 +35,24 @@ h1 {
     background-color: #f2f2f2;
 }
 
-#scoreboard input[type="number"] {
-    width: 40px;
-    border: none;
-    text-align: center;
-    font-size: 1em;
+.team-body:not(:first-child) {
+    border-top: 3px solid #000;
 }
 
-/* Chrome, Safari, Edge, Opera からスピナーを非表示にする */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox からスピナーを非表示にする */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-.team-name {
-    width: 120px;
+.player-name {
+    width: 150px;
     font-weight: bold;
     text-align: left;
+    padding-left: 10px !important;
 }
 
-.total-runs, .total-hits, .total-errors {
+.inning-box {
+    min-height: 40px; /* セルの高さを確保 */
+}
+
+.total-runs {
     font-weight: bold;
+    background-color: #f2f2f2;
 }
 
 #controls {

@@ -21,7 +21,7 @@
     <table id="scoreboard">
         <thead>
             <tr>
-                <th>チーム</th>
+                <th>選手</th>
                 <th>1</th>
                 <th>2</th>
                 <th>3</th>
@@ -34,33 +34,11 @@
                 <th>R</th>
             </tr>
         </thead>
-        <tbody id="score-body">
-            <tr id="visitor-score">
-                <td class="team-name">ビジター</td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td class="total-runs">0</td>
-            </tr>
-            <tr id="home-score">
-                <td class="team-name">ホーム</td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td><input type="number" min="0"></td>
-                <td class="total-runs">0</td>
-            </tr>
+        <tbody id="visitor-body" class="team-body">
+            <!-- JS will generate player rows and a total row here -->
+        </tbody>
+        <tbody id="home-body" class="team-body">
+            <!-- JS will generate player rows and a total row here -->
         </tbody>
     </table>
 
