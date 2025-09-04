@@ -32,8 +32,6 @@
                 <th>8</th>
                 <th>9</th>
                 <th>R</th>
-                <th>H</th>
-                <th>E</th>
             </tr>
         </thead>
         <tbody id="score-body">
@@ -49,8 +47,6 @@
                 <td><input type="number" min="0"></td>
                 <td><input type="number" min="0"></td>
                 <td class="total-runs">0</td>
-                <td class="total-hits">0</td>
-                <td class="total-errors">0</td>
             </tr>
             <tr id="home-score">
                 <td class="team-name">ホーム</td>
@@ -64,11 +60,41 @@
                 <td><input type="number" min="0"></td>
                 <td><input type="number" min="0"></td>
                 <td class="total-runs">0</td>
-                <td class="total-hits">0</td>
-                <td class="total-errors">0</td>
             </tr>
         </tbody>
     </table>
+
+    <div id="rosters-container">
+        <div id="visitor-roster" class="roster-box">
+            <h2>ビジターチーム選手名簿</h2>
+            <ol>
+                <li><input type="text" placeholder="1番選手"></li>
+                <li><input type="text" placeholder="2番選手"></li>
+                <li><input type="text" placeholder="3番選手"></li>
+                <li><input type="text" placeholder="4番選手"></li>
+                <li><input type="text" placeholder="5番選手"></li>
+                <li><input type="text" placeholder="6番選手"></li>
+                <li><input type="text" placeholder="7番選手"></li>
+                <li><input type="text" placeholder="8番選手"></li>
+                <li><input type="text" placeholder="9番選手"></li>
+            </ol>
+        </div>
+        <div id="home-roster" class="roster-box">
+            <h2>ホームチーム選手名簿</h2>
+            <ol>
+                <li><input type="text" placeholder="1番選手"></li>
+                <li><input type="text" placeholder="2番選手"></li>
+                <li><input type="text" placeholder="3番選手"></li>
+                <li><input type="text" placeholder="4番選手"></li>
+                <li><input type="text" placeholder="5番選手"></li>
+                <li><input type="text" placeholder="6番選手"></li>
+                <li><input type="text" placeholder="7番選手"></li>
+                <li><input type="text" placeholder="8番選手"></li>
+                <li><input type="text" placeholder="9番選手"></li>
+            </ol>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

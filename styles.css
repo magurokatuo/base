@@ -81,3 +81,53 @@ input[type=number] {
 #reset-button:hover {
     background-color: #e0e0e0;
 }
+
+/* --- 選手名簿スタイル --- */
+#rosters-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.roster-box {
+    width: 45%;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.roster-box h2 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.roster-box ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.roster-box li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.roster-box li::before {
+    content: counter(list-item) ".";
+    counter-increment: list-item;
+    margin-right: 10px;
+    font-weight: bold;
+    width: 20px; /* 番号の幅を固定 */
+    text-align: right;
+}
+
+.roster-box input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
