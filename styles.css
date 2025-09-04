@@ -50,9 +50,30 @@ h1 {
     min-height: 40px; /* セルの高さを確保 */
 }
 
-.total-runs {
+.total-label {
     font-weight: bold;
     background-color: #f2f2f2;
+}
+
+.manual-runs {
+    width: 40px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    background-color: #f2f2f2;
+    padding: 0;
+    font-size: 1em;
+}
+
+/* Firefox からスピナーを非表示にする */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 #controls {

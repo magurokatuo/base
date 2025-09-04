@@ -31,34 +31,53 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // 合計行を追加
             const totalRow = document.createElement('tr');
+            const manualRunValue = state?.[`${teamType}ManualRuns`] || 0;
             totalRow.innerHTML = `
                 <td class="total-label">合計</td>
                 <td colspan="${NUM_INNINGS}"></td>
-                <td class="total-runs">0</td>`;
+                <td><input type="number" class="manual-runs" value="${manualRunValue}"></td>
+                <td class="total-hits">0</td>
+                <td class="total-errors">0</td>`;
             body.appendChild(totalRow);
+        });
+    };
+
+    // --- H/E合計計算機能 ---
+    const calculateAndDisplayTotals = () => {
+        [visitorBody, homeBody].forEach(body => {
+            let hits = 0;
+            let errors = 0;
+            const plays = Array.from(body.querySelectorAll('.inning-box')).map(box => box.textContent.toUpperCase());
+
+            plays.forEach(play => {
+                if (['1B', '2B', '3B', 'HR'].includes(play)) {
+                    hits++;
+                }
+                if (play.startsWith('E')) {
+                    errors++;
+                }
+            });
+            body.querySelector('.total-hits').textContent = hits;
+            body.querySelector('.total-errors').textContent = errors;
         });
     };
 
     // --- 状態保存機能 ---
     const saveState = () => {
-        const visitorRoster = Array.from(document.querySelectorAll('#visitor-roster input[type="text"]')).map(input => input.value);
-        const homeRoster = Array.from(document.querySelectorAll('#home-roster input[type="text"]')).map(input => input.value);
-
         const getPlaysForTeam = (teamBody) => {
             const rows = Array.from(teamBody.querySelectorAll('tr:not(:last-child)'));
-            return rows.map(row => {
-                const cells = Array.from(row.querySelectorAll('.inning-box'));
-                return cells.map(cell => cell.textContent);
-            });
+            return rows.map(row => Array.from(row.querySelectorAll('.inning-box')).map(cell => cell.textContent));
         };
 
         const state = {
             visitorTeamName: visitorTeamInput.value,
             homeTeamName: homeTeamInput.value,
-            visitorRoster: visitorRoster,
-            homeRoster: homeRoster,
+            visitorRoster: Array.from(document.querySelectorAll('#visitor-roster input[type="text"]')).map(input => input.value),
+            homeRoster: Array.from(document.querySelectorAll('#home-roster input[type="text"]')).map(input => input.value),
             visitorPlays: getPlaysForTeam(visitorBody),
             homePlays: getPlaysForTeam(homeBody),
+            visitorManualRuns: visitorBody.querySelector('.manual-runs').value,
+            homeManualRuns: homeBody.querySelector('.manual-runs').value,
         };
         localStorage.setItem('baseballScoreboardState', JSON.stringify(state));
     };
@@ -68,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedState = localStorage.getItem('baseballScoreboardState');
         const state = savedState ? JSON.parse(savedState) : {};
 
-        renderScoreboard(state); // ボードを描画
+        renderScoreboard(state);
 
         visitorTeamInput.value = state.visitorTeamName || '';
         homeTeamInput.value = state.homeTeamName || '';
@@ -76,17 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const visitorRosterInputs = document.querySelectorAll('#visitor-roster input[type="text"]');
         if (state.visitorRoster) {
             state.visitorRoster.forEach((name, index) => {
-                if (visitorRosterInputs[index]) visitorRosterInputs[index].value = name;
+                if(visitorRosterInputs[index]) visitorRosterInputs[index].value = name;
             });
         }
 
         const homeRosterInputs = document.querySelectorAll('#home-roster input[type="text"]');
         if (state.homeRoster) {
             state.homeRoster.forEach((name, index) => {
-                if (homeRosterInputs[index]) homeRosterInputs[index].value = name;
+                if(homeRosterInputs[index]) homeRosterInputs[index].value = name;
             });
         }
-        // 合計点の復元は次のステップで
+
+        calculateAndDisplayTotals();
     };
 
     // --- リセット機能 ---
@@ -95,14 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
         visitorTeamInput.value = '';
         homeTeamInput.value = '';
         document.querySelectorAll('#rosters-container input[type="text"]').forEach(input => input.value = '');
-        loadState(); // 空の状態で再描画・初期化
+        loadState();
     };
 
     // --- イベントリスナー ---
     visitorTeamInput.addEventListener('input', saveState);
     homeTeamInput.addEventListener('input', saveState);
     rostersContainer.addEventListener('input', (e) => {
-        // To prevent lag, we only re-render and save, not reload the whole state
         const teamBody = e.target.closest('.roster-box').id.includes('visitor') ? visitorBody : homeBody;
         const index = Array.from(e.target.closest('ol').children).indexOf(e.target.parentElement);
         teamBody.querySelectorAll('.player-name')[index].textContent = e.target.value;
@@ -113,10 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.classList.contains('inning-box')) {
             const currentPlay = e.target.textContent;
             const newPlay = prompt('打席結果を入力:', currentPlay);
-            if (newPlay !== null) { // promptでキャンセルを押すとnullが返る
+            if (newPlay !== null) {
                 e.target.textContent = newPlay;
+                calculateAndDisplayTotals();
                 saveState();
             }
+        }
+    });
+    // Manual runs input saving
+    scoreboard.addEventListener('input', (e) => {
+        if (e.target.classList.contains('manual-runs')) {
+            saveState();
         }
     });
 
