@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>野球スコアブック</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>野球スコアブック</h1>
+    <div id="game-info">
+        <input type="text" id="visitor-team-name" placeholder="ビジターチーム">
+        <span>VS</span>
+        <input type="text" id="home-team-name" placeholder="ホームチーム">
+    </div>
+
+    <div id="controls">
+        <button id="reset-button">リセット</button>
+    </div>
+
+    <table id="scoreboard">
+        <thead>
+            <tr>
+                <th>チーム</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+                <th>R</th>
+                <th>H</th>
+                <th>E</th>
+            </tr>
+        </thead>
+        <tbody id="score-body">
+            <tr id="visitor-score">
+                <td class="team-name">ビジター</td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td class="total-runs">0</td>
+                <td class="total-hits">0</td>
+                <td class="total-errors">0</td>
+            </tr>
+            <tr id="home-score">
+                <td class="team-name">ホーム</td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td><input type="number" min="0"></td>
+                <td class="total-runs">0</td>
+                <td class="total-hits">0</td>
+                <td class="total-errors">0</td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
